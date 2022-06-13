@@ -62,7 +62,7 @@ fun GraphToggleButtonRow(graphViewModel: GraphViewModel , optionList: List<Strin
                             if (text == graphViewModel.graphInterval) {
                                 color
                             } else {
-                                Color.LightGray
+                                Color.White
                             }
                         )
                         .padding(

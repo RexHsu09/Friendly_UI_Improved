@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Magenta
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -37,6 +38,8 @@ import com.codelab.basiclayouts.R
 import com.codelab.basiclayouts.navigation.Screen
 import com.codelab.basiclayouts.feature_account.presentation.track_expense.RecordingViewModel
 import com.codelab.basiclayouts.ui.theme.MySootheTheme
+import com.codelab.basiclayouts.ui.theme.Orange200
+import com.codelab.basiclayouts.ui.theme.Orange400
 
 
 @Composable
@@ -56,6 +59,7 @@ fun RecordingPageScreen(
                 Image(
                     painter = painterResource(id = R.drawable.app_background),
                     contentDescription = null,
+                    contentScale = ContentScale.Crop,
                     modifier = modifier.fillMaxSize()
                 )
                 RecordingPage(navController, recordingViewModel, modifier)
@@ -122,22 +126,22 @@ fun RecordingPage(
                         onSelectionChange = { type ->
                             recordingViewModel.typeChange(type)
                         })
-                    Spacer(modifier = Modifier.height(60.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
                     Button(
                         onClick = {
                             recordingViewModel.sendToDatabase()
                             navController.navigate(Screen.RecordScreen.route)
                                   },
+                        shape = MaterialTheme.shapes.small,
                         modifier = Modifier.width(200.dp),
                         colors = ButtonDefaults.buttonColors(
-                            backgroundColor = Magenta,
+                            backgroundColor = Orange200,
                             contentColor = Color.White
                         )
                     ) {
-                        Text("Save")
+                        Text("Save", fontSize = 24.sp)
                     }
                     Spacer(modifier = Modifier.height(20.dp))
-
                 }
             }
         }
@@ -162,13 +166,14 @@ fun Function(
                 modifier = Modifier.padding(all = 8.dp)
             ) {
                 Surface(
+                    color = Orange200,
                     border = BorderStroke(1.dp, Color.Black),
                     shape = RoundedCornerShape(10.dp),
                 ) {
                     Text(
                         text = text,
                         style = typography.body1.merge(),
-                        color = Color.White,
+                        color = Color.Black,
                         fontWeight = FontWeight.W600,
                         fontSize = when (text == recordingViewModel.category) {
                             true -> 22.sp
@@ -185,9 +190,9 @@ fun Function(
                             }
                             .background(
                                 if (text == recordingViewModel.category) {
-                                    Magenta
+                                    Orange200
                                 } else {
-                                    Color.LightGray
+                                    Color.White
                                 }
                             )
                             .padding(
@@ -320,6 +325,7 @@ fun Category(
 fun Type(text: String, st: String, os:() -> Unit){
     Row{
         Surface(
+            color = Orange200,
             border = BorderStroke(1.dp, Color.Black),
             shape = RoundedCornerShape(10.dp),
             modifier = Modifier
@@ -333,13 +339,12 @@ fun Type(text: String, st: String, os:() -> Unit){
                     .clickable { os() }
                     .background(
                         if (text == st) {
-                            Magenta
+                            Orange200
                         } else {
                             Color.White
                         }
                     )
                     .padding(start = 5.dp, top = 5.dp)
-
             )
         }
     }

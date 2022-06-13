@@ -180,6 +180,7 @@ fun HomepageScreen(
             Image(
                 painter = painterResource(id = R.drawable.app_background),
                 contentDescription = null,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
             )
             Row(

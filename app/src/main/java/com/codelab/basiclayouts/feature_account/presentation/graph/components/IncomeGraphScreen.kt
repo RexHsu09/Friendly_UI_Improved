@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -50,6 +51,7 @@ fun IncomeGraphScreen(
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.graph_background),
+                    contentScale = ContentScale.Crop,
                     contentDescription = null,
                     modifier = Modifier.fillMaxSize()
                 )
@@ -73,7 +75,7 @@ fun IncomeScreenTopAppBar(
     navController: NavController,
     modifier: Modifier = Modifier
 ){
-    Box(Modifier.background(Color.White)) {
+    Box(Modifier.background(Color.LightGray)) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -82,51 +84,31 @@ fun IncomeScreenTopAppBar(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Spacer(modifier = Modifier.width(100.dp))
-            Box(modifier = Modifier
-                .background(Color.LightGray)
-                .clip(
-                    shape = RoundedCornerShape(
-                        size = 12.dp,
-                    ),
-                )
-            )
-            {
+            Surface(
+                shape = RoundedCornerShape(size = 12.dp),
+                color = Color.White,
+            ) {
                 Text(
+                    fontWeight = FontWeight.Bold,
                     text = "Income",
+                    color = Color.Black,
                     fontSize = 25.sp,
-                    color = Color.Red,
                     modifier = Modifier
                         .padding(10.dp)
-                        .clip(
-                            shape = RoundedCornerShape(
-                                size = 12.dp,
-                            ),
-                        )
                 )
             }
             // Spacer(modifier = Modifier.width(20.dp))
             Column(modifier = Modifier.fillMaxHeight()) {
                 Spacer(modifier = Modifier.height(15.dp))
-                Box(
-                    modifier = Modifier
-                        .background(Color.LightGray)
-                        .clip(
-                            shape = RoundedCornerShape(
-                                size = 12.dp,
-                            ),
-                        )
+                Surface(
+                    shape = RoundedCornerShape(size = 12.dp),
+                    color = Color.White,
                 ) {
                     Text(
                         text = "Expense",
                         fontSize = 15.sp,
                         modifier = Modifier
-                            .background(color = Color.LightGray)
                             .padding(5.dp)
-                            .clip(
-                                shape = RoundedCornerShape(
-                                    size = 12.dp,
-                                ),
-                            )
                             .clickable(
                                 enabled = true,
                                 onClickLabel = "Book",

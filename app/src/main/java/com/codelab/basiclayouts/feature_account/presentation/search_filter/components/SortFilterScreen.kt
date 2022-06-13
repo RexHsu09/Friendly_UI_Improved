@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -51,6 +52,7 @@ fun FilterScreen(
                 Image(
                     painter = painterResource(id = R.drawable.app_background),
                     contentDescription = null,
+                    contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
                 )
                 Column(modifier = Modifier.fillMaxWidth()) {
@@ -72,25 +74,29 @@ fun FilterBody(
    Column(
        modifier = Modifier
            .fillMaxSize(),
-       horizontalAlignment = Alignment.CenterHorizontally
+       horizontalAlignment = Alignment.CenterHorizontally,
+       verticalArrangement = Arrangement.SpaceBetween
    ) {
-       TitleRow(title = "Sort By")
-       Spacer(modifier = Modifier.height(10.dp))
-       ToggleButtonRow(
-           filterViewModel,
-           optionList = listOf(
-                "Date", "Price", "Frequency"
-            )
-       )
-       Spacer(modifier = Modifier.height(20.dp))
-       TitleRow(title = "Interests")
-       // Spacer(modifier = Modifier.height(10.dp))
-       InterestBody(filterViewModel)
-       // Spacer(modifier = Modifier.height(20.dp))
-       TitleRow(title = "Price Range")
-       Spacer(modifier = Modifier.height(10.dp))
-       PriceRangeRow(filterViewModel)
-       Spacer(modifier = Modifier.height(30.dp))
+       Column(
+           horizontalAlignment = Alignment.CenterHorizontally
+       ) {
+           TitleRow(title = "Sort By")
+           Spacer(modifier = Modifier.height(10.dp))
+           ToggleButtonRow(
+               filterViewModel,
+               optionList = listOf(
+                   "Date", "Price", "Frequency"
+               )
+           )
+           Spacer(modifier = Modifier.height(20.dp))
+           TitleRow(title = "Interests")
+           // Spacer(modifier = Modifier.height(10.dp))
+           InterestBody(filterViewModel)
+           // Spacer(modifier = Modifier.height(20.dp))
+           TitleRow(title = "Price Range")
+           Spacer(modifier = Modifier.height(10.dp))
+           PriceRangeRow(filterViewModel)
+       }
        ConfirmButtonRow(navController, filterViewModel)
    }
 }
